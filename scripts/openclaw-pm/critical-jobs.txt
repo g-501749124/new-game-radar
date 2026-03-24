@@ -1,2 +1,1 @@
-# name|job_id
-# Fill these after we confirm which cron jobs are truly critical on this machine.
+bilibili-hot-30m|ffb01aed-2761-4a5c-b507-d3e4a39f6747
