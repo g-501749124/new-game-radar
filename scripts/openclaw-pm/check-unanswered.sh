@@ -80,7 +80,7 @@ check_session() {
     
     # 检查文件修改时间（除非 --all）
     if ! $INCLUDE_OLD; then
-        local mod_time=$(stat -f %m "$session_file" 2>/dev/null || stat -c %Y "$session_file" 2>/dev/null)
+        local mod_time=$(stat -c %Y "$session_file" 2>/dev/null || echo 0)
         local now=$(date +%s)
         local age_hours=$(( (now - mod_time) / 3600 ))
         if [ $age_hours -gt $MAX_AGE_HOURS ]; then
@@ -111,7 +111,7 @@ check_session() {
         # 获取时间戳
         local timestamp=$(echo "$last_line" | jq -r '.timestamp // empty' 2>/dev/null)
         if [ -z "$timestamp" ]; then
-            timestamp=$(stat -f %Sm -t "%Y-%m-%d %H:%M" "$session_file" 2>/dev/null || stat -c %y "$session_file" 2>/dev/null | cut -d. -f1)
+            timestamp=$(stat -c %y "$session_file" 2>/dev/null | cut -d. -f1)
         fi
         
         UNANSWERED_SESSIONS+=("$session_key")

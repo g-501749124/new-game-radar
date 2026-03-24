@@ -64,7 +64,7 @@ check_session_locks() {
         [[ -f "$lock_file" ]] || continue
         lock_count=$((lock_count + 1))
         
-        local age_minutes=$(( (now - $(stat -f %m "$lock_file")) / 60 ))
+        local age_minutes=$(( (now - $(stat -c %Y "$lock_file" 2>/dev/null || echo 0)) / 60 ))
         if [[ $age_minutes -gt 5 ]]; then
             stale_count=$((stale_count + 1))
             stale_list="$stale_list\n  - $(basename "$lock_file") (${age_minutes}min)"
@@ -144,7 +144,9 @@ check_queue_status() {
     if [[ -n "$last_dequeue" ]]; then
         local dequeue_time=$(echo "$last_dequeue" | grep -oE '"date":"[^"]+' | sed 's/"date":"//' | sed 's/\..*//')
         if [[ -n "$dequeue_time" ]]; then
-            local dequeue_epoch=$(date -j -f "%Y-%m-%dT%H:%M:%S" "$dequeue_time" +%s 2>/dev/null || echo 0)
+            local dequeue_epoch=$(python3 -c 'from datetime import datetime; import sys; s=sys.argv[1].split(".")[0].replace("Z","");
+try: print(int(datetime.strptime(s, "%Y-%m-%dT%H:%M:%S").timestamp()))
+except: print(0)' "$dequeue_time")
             local now_epoch=$(date +%s)
             local age_seconds=$((now_epoch - dequeue_epoch))
             
