@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New Game Radar</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">直播平台 × Steam</p>
+        <h1>新游雷达</h1>
+        <p class="subtitle">从斗鱼、虎牙、B站直播采样，结合 Steam 近 30 天发售信息，筛选可能刚上线且正在被主播开播的新游戏。</p>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="label">采样直播间</span>
+          <strong id="sampleCount">--</strong>
+        </div>
+        <div class="stat">
+          <span class="label">Steam 近发售命中</span>
+          <strong id="recentCount">--</strong>
+        </div>
+        <div class="stat">
+          <span class="label">候选新游</span>
+          <strong id="candidateCount">--</strong>
+        </div>
+      </div>
+    </header>
+
+    <section class="panel meta">
+      <div>
+        <span class="meta-label">状态</span>
+        <strong id="statusText">加载中…</strong>
+      </div>
+      <div>
+        <span class="meta-label">更新时间</span>
+        <strong id="generatedAt">--</strong>
+      </div>
+      <div>
+        <button id="refreshBtn" type="button">刷新页面数据</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>雷达结果</h2>
+      <div id="emptyState" class="empty hidden">
+        <p>这轮还没有匹配到符合条件的新游戏。</p>
+        <p class="empty-sub">可能是平台热度仍集中在老游戏，也可能只是今天没有撞上新游开播窗口。</p>
+      </div>
+      <div id="cardList" class="card-list"></div>
+    </section>
+
+    <section class="panel">
+      <h2>原始播报</h2>
+      <pre id="messageBox" class="message-box">加载中…</pre>
+    </section>
+  </main>
+
+  <template id="cardTemplate">
+    <article class="card">
+      <div class="card-top">
+        <div>
+          <h3 class="game-name"></h3>
+          <p class="steam-name"></p>
+        </div>
+        <div class="score-badge"></div>
+      </div>
+      <div class="grid">
+        <div>
+          <span class="label">发售日期</span>
+          <strong class="release-date"></strong>
+        </div>
+        <div>
+          <span class="label">平台</span>
+          <strong class="platforms"></strong>
+        </div>
+        <div>
+          <span class="label">直播间样本</span>
+          <strong class="count"></strong>
+        </div>
+        <div>
+          <span class="label">综合热度</span>
+          <strong class="heat"></strong>
+        </div>
+      </div>
+      <div class="chips reasons"></div>
+      <div class="chips streamers"></div>
+      <p class="title-sample"></p>
+      <a class="steam-link" target="_blank" rel="noreferrer noopener">打开 Steam 页面</a>
+    </article>
+  </template>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>

@@ -53,5 +53,70 @@
     "matched": false,
     "game": "马里奥制造",
     "checkedAt": 1774342367
+  },
+  "冒险岛": {
+    "matched": false,
+    "game": "冒险岛",
+    "error": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+  },
+  "剑网3": {
+    "matched": false,
+    "game": "剑网3",
+    "checkedAt": 1774399933
+  },
+  "四国军棋": {
+    "matched": false,
+    "game": "四国军棋",
+    "error": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+  },
+  "恐怖游戏": {
+    "matched": false,
+    "game": "恐怖游戏",
+    "error": "HTTPSConnectionPool(host='store.steampowered.com', port=443): Max retries exceeded with url: /api/appdetails?appids=1952890&l=schinese&cc=cn (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7ee47bebd3a0>, 'Connection to store.steampowered.com timed out. (connect timeout=20)'))"
+  },
+  "摸了个鱼": {
+    "matched": false,
+    "game": "摸了个鱼",
+    "checkedAt": 1774399976
+  },
+  "明日方舟：终末地": {
+    "matched": false,
+    "game": "明日方舟：终末地",
+    "error": "HTTPSConnectionPool(host='store.steampowered.com', port=443): Max retries exceeded with url: /search/suggest?term=%E6%98%8E%E6%97%A5%E6%96%B9%E8%88%9F%EF%BC%9A%E7%BB%88%E6%9C%AB%E5%9C%B0&f=games&cc=CN&l=schinese (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7ee47bebd580>, 'Connection to store.steampowered.com timed out. (connect timeout=20)'))"
+  },
+  "梦幻手游": {
+    "matched": false,
+    "game": "梦幻手游",
+    "error": "HTTPSConnectionPool(host='store.steampowered.com', port=443): Max retries exceeded with url: /search/suggest?term=%E6%A2%A6%E5%B9%BB%E6%89%8B%E6%B8%B8&f=games&cc=CN&l=schinese (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7ee47be42060>, 'Connection to store.steampowered.com timed out. (connect timeout=20)'))"
+  },
+  "欢乐斗地主": {
+    "matched": false,
+    "game": "欢乐斗地主",
+    "error": "HTTPSConnectionPool(host='store.steampowered.com', port=443): Max retries exceeded with url: /search/suggest?term=%E6%AC%A2%E4%B9%90%E6%96%97%E5%9C%B0%E4%B8%BB&f=games&cc=CN&l=schinese (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7ee47bf6ac90>, 'Connection to store.steampowered.com timed out. (connect timeout=20)'))"
+  },
+  "英雄联盟手游": {
+    "matched": false,
+    "game": "英雄联盟手游",
+    "error": "HTTPSConnectionPool(host='store.steampowered.com', port=443): Max retries exceeded with url: /search/suggest?term=%E8%8B%B1%E9%9B%84%E8%81%94%E7%9B%9F%E6%89%8B%E6%B8%B8&f=games&cc=CN&l=schinese (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7ee47bebd880>, 'Connection to store.steampowered.com timed out. (connect timeout=20)'))"
+  },
+  "虎牙地方": {
+    "matched": false,
+    "game": "虎牙地方",
+    "error": "HTTPSConnectionPool(host='store.steampowered.com', port=443): Max retries exceeded with url: /search/suggest?term=%E8%99%8E%E7%89%99%E5%9C%B0%E6%96%B9&f=games&cc=CN&l=schinese (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7ee47bebec00>, 'Connection to store.steampowered.com timed out. (connect timeout=20)'))"
+  },
+  "虎牙文化": {
+    "matched": false,
+    "game": "虎牙文化",
+    "checkedAt": 1774400077
+  },
+  "逃离塔科夫": {
+    "matched": false,
+    "game": "逃离塔科夫",
+    "checkedAt": 1774400078
+  },
+  "自走棋": {
+    "matched": false,
+    "game": "自走棋",
+    "error": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
   }
 }
