@@ -1,17 +1,17 @@
 {
-  "message": "主播新游雷达（03-25 10:11）\n\n这轮没匹配到“近30天发售且正在直播平台开播”的新游戏。\n",
+  "message": "主播新游雷达（03-25 10:39）\n\n这轮没匹配到“近30天发售且正在直播平台开播”的新游戏。\n",
   "candidates": [],
-  "sampleCount": 29,
+  "sampleCount": 27,
   "recentCount": 0,
   "topLiveRoom": {
     "platform": "斗鱼",
-    "game": "明日方舟：终末地",
-    "streamer": "龙四爷攻略组",
-    "title": "明天下午星铁帮抽和剧情！",
-    "heat": 1607492,
-    "room_id": "479079",
-    "room_url": "https://www.douyu.com/479079"
+    "game": "无畏契约：源能行动",
+    "streamer": "风笛ovo",
+    "title": "风笛：三服赋能，双生武魂！",
+    "heat": 1512769,
+    "room_id": "10362982",
+    "room_url": "https://www.douyu.com/10362982"
   },
-  "generatedAt": "2026-03-25T10:11:17.052659+08:00",
+  "generatedAt": "2026-03-25T10:39:17.180216+08:00",
   "status": "当前无候选新游"
 }
