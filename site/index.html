@@ -12,7 +12,7 @@
       <div>
         <p class="eyebrow">直播平台 × Steam</p>
         <h1>新游雷达</h1>
-        <p class="subtitle">从斗鱼、虎牙、B站直播采样，结合 Steam 近 30 天发售信息，筛选可能刚上线且正在被主播开播的新游戏。</p>
+        <p class="subtitle">从斗鱼、虎牙、B站直播采样，结合 Steam 近 30 天发售信息，筛选可能刚上线且正在被主播开播的新游戏，同时展示当前平台热度最高的游戏直播间。</p>
       </div>
       <div class="hero-stats">
         <div class="stat">
@@ -29,6 +29,44 @@
         </div>
       </div>
     </header>
+
+    <section class="panel spotlight-panel">
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow">可验证实时内容</p>
+          <h2>当前平台热度最高的游戏直播间</h2>
+        </div>
+        <span id="topBadge" class="top-badge">加载中…</span>
+      </div>
+      <div id="topRoomCard" class="top-room-card hidden">
+        <div class="top-room-main">
+          <p class="top-room-title" id="topRoomTitle">--</p>
+          <h3 id="topRoomGame">--</h3>
+          <p class="top-room-streamer">主播：<strong id="topRoomStreamer">--</strong></p>
+        </div>
+        <div class="top-room-grid">
+          <div>
+            <span class="label">平台</span>
+            <strong id="topRoomPlatform">--</strong>
+          </div>
+          <div>
+            <span class="label">热度</span>
+            <strong id="topRoomHeat">--</strong>
+          </div>
+          <div>
+            <span class="label">房间号</span>
+            <strong id="topRoomId">--</strong>
+          </div>
+          <div>
+            <span class="label">房间链接</span>
+            <a id="topRoomLink" target="_blank" rel="noreferrer noopener">打开直播间</a>
+          </div>
+        </div>
+      </div>
+      <div id="topRoomEmpty" class="empty hidden">
+        <p>这轮还没有获取到可展示的直播间样本。</p>
+      </div>
+    </section>
 
     <section class="panel meta">
       <div>

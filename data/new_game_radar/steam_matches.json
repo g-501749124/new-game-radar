@@ -118,5 +118,20 @@
     "matched": false,
     "game": "自走棋",
     "error": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+  },
+  "足球经理26": {
+    "matched": false,
+    "game": "足球经理26",
+    "checkedAt": 1774404081
+  },
+  "FCONLINE": {
+    "matched": false,
+    "game": "FCONLINE",
+    "checkedAt": 1774404319
+  },
+  "雀魂": {
+    "matched": false,
+    "game": "雀魂",
+    "checkedAt": 1774404677
   }
 }

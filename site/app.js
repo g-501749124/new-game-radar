@@ -11,6 +11,16 @@ const els = {
   messageBox: document.getElementById('messageBox'),
   refreshBtn: document.getElementById('refreshBtn'),
   template: document.getElementById('cardTemplate'),
+  topBadge: document.getElementById('topBadge'),
+  topRoomCard: document.getElementById('topRoomCard'),
+  topRoomEmpty: document.getElementById('topRoomEmpty'),
+  topRoomTitle: document.getElementById('topRoomTitle'),
+  topRoomGame: document.getElementById('topRoomGame'),
+  topRoomStreamer: document.getElementById('topRoomStreamer'),
+  topRoomPlatform: document.getElementById('topRoomPlatform'),
+  topRoomHeat: document.getElementById('topRoomHeat'),
+  topRoomId: document.getElementById('topRoomId'),
+  topRoomLink: document.getElementById('topRoomLink'),
 };
 
 function formatNumber(value) {
@@ -31,6 +41,38 @@ function chip(text) {
   const node = document.createElement('span');
   node.textContent = text;
   return node;
+}
+
+function renderTopRoom(topLiveRoom) {
+  if (!topLiveRoom) {
+    els.topBadge.textContent = '暂无样本';
+    els.topRoomCard.classList.add('hidden');
+    els.topRoomEmpty.classList.remove('hidden');
+    return;
+  }
+
+  els.topBadge.textContent = '实时样本';
+  els.topRoomCard.classList.remove('hidden');
+  els.topRoomEmpty.classList.add('hidden');
+
+  els.topRoomTitle.textContent = topLiveRoom.title || '暂无直播标题';
+  els.topRoomGame.textContent = topLiveRoom.game || '未知游戏';
+  els.topRoomStreamer.textContent = topLiveRoom.streamer || '未知主播';
+  els.topRoomPlatform.textContent = topLiveRoom.platform || '未知平台';
+  els.topRoomHeat.textContent = formatNumber(topLiveRoom.heat ?? 0);
+  els.topRoomId.textContent = topLiveRoom.room_id || '未知';
+
+  if (topLiveRoom.room_url) {
+    els.topRoomLink.href = topLiveRoom.room_url;
+    els.topRoomLink.textContent = '打开直播间';
+    els.topRoomLink.style.opacity = '1';
+    els.topRoomLink.style.pointerEvents = 'auto';
+  } else {
+    els.topRoomLink.removeAttribute('href');
+    els.topRoomLink.textContent = '暂无链接';
+    els.topRoomLink.style.opacity = '0.6';
+    els.topRoomLink.style.pointerEvents = 'none';
+  }
 }
 
 function renderCards(candidates) {
@@ -82,6 +124,7 @@ async function loadRadar() {
     els.generatedAt.textContent = formatGeneratedAt(data.generatedAt);
     els.messageBox.textContent = data.message || '无播报内容';
     els.statusText.textContent = data.status || ((data.candidates || []).length ? '已加载' : '当前无候选新游');
+    renderTopRoom(data.topLiveRoom || null);
     renderCards(data.candidates || []);
   } catch (error) {
     els.statusText.textContent = '加载失败';
@@ -89,6 +132,7 @@ async function loadRadar() {
     els.messageBox.textContent = `读取 ${dataUrl} 失败：${error.message}`;
     els.cardList.innerHTML = '';
     els.emptyState.classList.remove('hidden');
+    renderTopRoom(null);
   }
 }
 

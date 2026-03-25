@@ -87,9 +87,12 @@ def fetch_douyu_pages(pages=3):
             game = clean_name(item.get('c2name') or item.get('c2name_display') or '')
             if not is_probably_game(game):
                 continue
+            rid = item.get('rid')
             out.append({
                 'platform': '斗鱼', 'game': game, 'streamer': item.get('nn') or '',
                 'title': item.get('rn') or '', 'heat': int(item.get('ol') or 0),
+                'room_id': str(rid or ''),
+                'room_url': f'https://www.douyu.com/{rid}' if rid else '',
             })
     return out
 
@@ -106,9 +109,12 @@ def fetch_huya_pages(pages=3):
                 heat = int(float(item.get('totalCount') or 0))
             except Exception:
                 heat = 0
+            profile_room = item.get('profileRoom') or ''
             out.append({
                 'platform': '虎牙', 'game': game, 'streamer': item.get('nick') or '',
                 'title': item.get('introduction') or item.get('roomName') or '', 'heat': heat,
+                'room_id': str(profile_room or item.get('roomId') or ''),
+                'room_url': f'https://www.huya.com/{profile_room}' if profile_room else '',
             })
     return out
 
@@ -121,9 +127,12 @@ def fetch_bili_pages(pages=2):
             game = clean_name(item.get('area_name') or '')
             if not is_probably_game(game):
                 continue
+            roomid = item.get('roomid')
             out.append({
                 'platform': 'B站直播', 'game': game, 'streamer': item.get('uname') or '',
                 'title': item.get('title') or '', 'heat': int(item.get('online') or 0),
+                'room_id': str(roomid or ''),
+                'room_url': f'https://live.bilibili.com/{roomid}' if roomid else '',
             })
     return out
 
@@ -268,6 +277,21 @@ def score_entry(game, entries):
     }
 
 
+def build_top_live_room(rows):
+    if not rows:
+        return None
+    top = max(rows, key=lambda row: (row.get('heat') or 0, row.get('platform') or '', row.get('game') or ''))
+    return {
+        'platform': top.get('platform') or '',
+        'game': top.get('game') or '',
+        'streamer': top.get('streamer') or '',
+        'title': top.get('title') or '',
+        'heat': int(top.get('heat') or 0),
+        'room_id': top.get('room_id') or '',
+        'room_url': top.get('room_url') or '',
+    }
+
+
 def build_radar():
     rows = fetch_douyu_pages(3) + fetch_huya_pages(3) + fetch_bili_pages(2)
     grouped = defaultdict(list)
@@ -288,7 +312,8 @@ def build_radar():
         item['appid'] = steam_info.get('appid')
         candidates.append(item)
     candidates.sort(key=lambda x: (-x['score'], -x['total_heat'], -x['count'], x['game']))
-    return candidates, rows, recent
+    top_live_room = build_top_live_room(rows)
+    return candidates, rows, recent, top_live_room
 
 
 def format_text(candidates):
@@ -313,8 +338,14 @@ def format_text(candidates):
 
 
 if __name__ == '__main__':
-    candidates, rows, recent = build_radar()
+    candidates, rows, recent, top_live_room = build_radar()
     if len(sys.argv) > 1 and sys.argv[1] == '--json':
-        print(json.dumps({'message': format_text(candidates), 'candidates': candidates, 'sampleCount': len(rows), 'recentCount': len(recent)}, ensure_ascii=False))
+        print(json.dumps({
+            'message': format_text(candidates),
+            'candidates': candidates,
+            'sampleCount': len(rows),
+            'recentCount': len(recent),
+            'topLiveRoom': top_live_room,
+        }, ensure_ascii=False))
     else:
         print(format_text(candidates), end='')

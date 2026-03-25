@@ -22,6 +22,8 @@ body {
   color: var(--text);
 }
 
+a { color: inherit; }
+
 .app {
   width: min(1120px, calc(100% - 32px));
   margin: 0 auto;
@@ -77,6 +79,80 @@ h2 { font-size: 22px; margin-bottom: 18px; }
 .panel {
   margin-top: 22px;
   padding: 24px;
+}
+
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.top-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 14px;
+  border-radius: 999px;
+  background: rgba(34, 197, 94, 0.16);
+  color: #bbf7d0;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.top-room-card {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1.1fr 1fr;
+  padding: 24px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, rgba(96, 165, 250, 0.12), rgba(15, 23, 42, 0.8));
+  border: 1px solid rgba(96, 165, 250, 0.18);
+}
+
+.top-room-main {
+  display: grid;
+  gap: 10px;
+}
+
+.top-room-title {
+  color: #dbeafe;
+  line-height: 1.6;
+  font-size: 18px;
+}
+
+.top-room-main h3 {
+  font-size: clamp(28px, 4vw, 40px);
+}
+
+.top-room-streamer {
+  color: #c7d7f5;
+}
+
+.top-room-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.top-room-grid > div {
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(2, 6, 23, 0.36);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.top-room-grid strong,
+.top-room-grid a,
+.grid strong {
+  display: block;
+  margin-top: 6px;
+}
+
+.top-room-grid a {
+  color: #93c5fd;
+  text-decoration: none;
+  font-weight: 700;
 }
 
 .meta {
@@ -135,11 +211,6 @@ h2 { font-size: 22px; margin-bottom: 18px; }
   gap: 14px;
 }
 
-.grid strong {
-  display: block;
-  margin-top: 6px;
-}
-
 .chips {
   display: flex;
   gap: 8px;
@@ -184,6 +255,10 @@ h2 { font-size: 22px; margin-bottom: 18px; }
 .hidden { display: none; }
 
 @media (max-width: 860px) {
-  .hero, .meta { grid-template-columns: 1fr; }
+  .hero, .meta, .top-room-card { grid-template-columns: 1fr; }
+  .panel-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
   #refreshBtn { justify-self: start; }
 }
