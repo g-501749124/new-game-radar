@@ -435,7 +435,11 @@ h2 {
 .card,
 .message-box,
 .empty,
-.top-room-card {
+.top-room-card,
+.promo-player-card,
+.promo-side-card,
+.promo-facts > div,
+.promo-chip {
   position: relative;
 }
 
@@ -445,7 +449,11 @@ h2 {
 .top-room-grid > div,
 .cat-callout,
 .message-box,
-.empty {
+.empty,
+.promo-player-card,
+.promo-side-card,
+.promo-facts > div,
+.promo-chip {
   padding: 18px;
   border-radius: 22px;
   background: rgba(8, 13, 28, 0.72);
@@ -628,6 +636,169 @@ h2 {
   gap: 18px;
 }
 
+.promo-panel {
+  background:
+    linear-gradient(180deg, rgba(9, 15, 31, 0.95), rgba(8, 12, 24, 0.9)),
+    radial-gradient(circle at 14% 18%, rgba(245, 158, 11, 0.12), transparent 28%),
+    radial-gradient(circle at 82% 12%, rgba(96, 165, 250, 0.14), transparent 26%);
+}
+
+.promo-head {
+  align-items: center;
+}
+
+.promo-badge {
+  background: rgba(245, 158, 11, 0.14);
+  color: var(--cat-soft);
+  border-color: rgba(245, 158, 11, 0.18);
+}
+
+.promo-shell {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
+  align-items: stretch;
+}
+
+.promo-player-card,
+.promo-side-card {
+  display: grid;
+  gap: 18px;
+  background:
+    linear-gradient(180deg, rgba(13, 19, 36, 0.94), rgba(7, 11, 23, 0.9));
+}
+
+.promo-player-card {
+  padding: 20px;
+}
+
+.promo-player-frame {
+  position: relative;
+  min-height: 320px;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(125, 211, 252, 0.14);
+  background:
+    radial-gradient(circle at top right, rgba(245, 158, 11, 0.2), transparent 28%),
+    linear-gradient(155deg, rgba(96, 165, 250, 0.18), rgba(7, 11, 23, 0.96));
+}
+
+.promo-player-glow {
+  position: absolute;
+  inset: auto 24px -28px auto;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: rgba(245, 158, 11, 0.18);
+  filter: blur(28px);
+  pointer-events: none;
+}
+
+.promo-video {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  display: block;
+  object-fit: cover;
+  background: #04060d;
+}
+
+.promo-meta {
+  display: grid;
+  gap: 14px;
+}
+
+.promo-meta h3,
+.promo-side-card h3 {
+  font-size: 26px;
+  line-height: 1.2;
+}
+
+.promo-blurb {
+  color: var(--soft);
+  line-height: 1.72;
+  font-size: 14px;
+}
+
+.promo-facts {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.promo-facts > div {
+  padding: 16px;
+}
+
+.promo-facts strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 18px;
+}
+
+.promo-side-card {
+  align-content: start;
+}
+
+.promo-chooser {
+  display: grid;
+  gap: 12px;
+}
+
+.promo-chip {
+  width: 100%;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+
+.promo-chip:hover {
+  transform: translateY(-2px);
+  border-color: rgba(125, 211, 252, 0.24);
+}
+
+.promo-chip.active {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.14), rgba(96, 165, 250, 0.18));
+  border-color: rgba(245, 158, 11, 0.22);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.22);
+}
+
+.promo-chip-emoji {
+  width: 42px;
+  height: 42px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.promo-chip-copy {
+  display: grid;
+  gap: 4px;
+}
+
+.promo-chip-copy strong {
+  font-size: 15px;
+}
+
+.promo-chip-copy small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.promo-callout {
+  margin-top: auto;
+}
+
 .card {
   isolation: isolate;
   overflow: hidden;
@@ -766,7 +937,8 @@ h2 {
 @media (max-width: 980px) {
   .hero,
   .top-room-card,
-  .meta-ribbon {
+  .meta-ribbon,
+  .promo-shell {
     grid-template-columns: 1fr;
   }
 
@@ -801,13 +973,15 @@ h2 {
   .grid,
   .top-room-grid,
   .hero-mini-cards,
-  .cat-stage-strip {
+  .cat-stage-strip,
+  .promo-facts {
     grid-template-columns: 1fr;
   }
 
   .card-top,
   .panel-head,
-  .cat-thumb-card {
+  .cat-thumb-card,
+  .promo-chip {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -817,7 +991,9 @@ h2 {
     align-self: flex-start;
   }
 
-  .cat-stage-frame {
+  .cat-stage-frame,
+  .promo-player-frame,
+  .promo-video {
     min-height: 280px;
   }
 

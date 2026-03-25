@@ -173,6 +173,59 @@
       </div>
     </section>
 
+    <section class="panel promo-panel" aria-label="视频宣传区">
+      <div class="panel-head compact promo-head">
+        <div>
+          <p class="eyebrow">视频宣传</p>
+          <h2>猫狗轮播宣传位</h2>
+          <p class="panel-subtitle">站内放 3 段本地短视频，用户可以随手切换，让首页不只是静态看板，而是带一点会动的情绪价值。</p>
+        </div>
+        <span class="top-badge promo-badge">LOCAL VIDEO × 3</span>
+      </div>
+
+      <div class="promo-shell">
+        <div class="promo-player-card">
+          <div class="promo-player-frame">
+            <video id="promoVideo" class="promo-video" controls preload="metadata" playsinline poster="./assets/cats/cat_hero.png"></video>
+            <div class="promo-player-glow"></div>
+          </div>
+          <div class="promo-meta">
+            <div>
+              <p class="eyebrow">当前片段</p>
+              <h3 id="promoTitle">加载中…</h3>
+            </div>
+            <p id="promoBlurb" class="promo-blurb">正在装配宣传片内容…</p>
+            <div class="promo-facts">
+              <div>
+                <span class="label">主角</span>
+                <strong id="promoSpecies">--</strong>
+              </div>
+              <div>
+                <span class="label">时长</span>
+                <strong id="promoDuration">--</strong>
+              </div>
+              <div>
+                <span class="label">来源</span>
+                <strong>本站本地视频</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="promo-side-card">
+          <div>
+            <p class="eyebrow">切换列表</p>
+            <h3>选一只来暖场</h3>
+          </div>
+          <div id="promoChooser" class="promo-chooser" role="tablist" aria-label="视频选择"></div>
+          <div class="cat-callout promo-callout">
+            <span>🎬</span>
+            <p>视频都放在站点本地目录，80 端口直接可播，不依赖外站嵌入。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="radar-board" class="panel radar-panel">
       <div class="panel-head compact">
         <div>

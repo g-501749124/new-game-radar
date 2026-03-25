@@ -1,17 +1,17 @@
 {
-  "message": "主播新游雷达（03-25 11:38）\n\n这轮没匹配到“近30天发售且正在直播平台开播”的新游戏。\n",
+  "message": "主播新游雷达（03-25 11:45）\n\n这轮没匹配到“近30天发售且正在直播平台开播”的新游戏。\n",
   "candidates": [],
-  "sampleCount": 26,
+  "sampleCount": 27,
   "recentCount": 0,
   "topLiveRoom": {
     "platform": "斗鱼",
     "game": "无畏契约：源能行动",
     "streamer": "不太冷xxx",
     "title": "无畏契约启动！！！！！！！",
-    "heat": 2353179,
+    "heat": 2354650,
     "room_id": "3125893",
     "room_url": "https://www.douyu.com/3125893"
   },
-  "generatedAt": "2026-03-25T11:38:29.427905+08:00",
+  "generatedAt": "2026-03-25T11:45:51.023639+08:00",
   "status": "当前无候选新游"
 }

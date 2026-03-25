@@ -1,5 +1,35 @@
 const dataUrl = './data/radar.json';
 
+const promoVideos = [
+  {
+    id: 'cat-radar-1',
+    title: '猫猫雷达暖场片',
+    blurb: '先让值班猫伸个懒腰，适合挂在首页当开场氛围。',
+    species: '猫猫',
+    duration: '约 30 秒',
+    src: './media/videos/cat-radar-1.mp4',
+    poster: './assets/cats/cat_hero.png',
+  },
+  {
+    id: 'dog-radar-1',
+    title: '狗狗冲榜加油片',
+    blurb: '给页面一点活力，狗狗负责把宣传区热度往上拱。',
+    species: '狗狗',
+    duration: '约 30 秒',
+    src: './media/videos/dog-radar-1.mp4',
+    poster: './assets/cats/cat_peek.png',
+  },
+  {
+    id: 'cat-radar-2',
+    title: '夜班猫猫巡航片',
+    blurb: '第二只值班猫继续守着首页，适合循环播放。',
+    species: '猫猫',
+    duration: '约 30 秒',
+    src: './media/videos/cat-radar-2.mp4',
+    poster: './assets/cats/cat_sleep.png',
+  },
+];
+
 const els = {
   sampleCount: document.getElementById('sampleCount'),
   recentCount: document.getElementById('recentCount'),
@@ -21,6 +51,12 @@ const els = {
   topRoomHeat: document.getElementById('topRoomHeat'),
   topRoomId: document.getElementById('topRoomId'),
   topRoomLink: document.getElementById('topRoomLink'),
+  promoVideo: document.getElementById('promoVideo'),
+  promoTitle: document.getElementById('promoTitle'),
+  promoBlurb: document.getElementById('promoBlurb'),
+  promoSpecies: document.getElementById('promoSpecies'),
+  promoDuration: document.getElementById('promoDuration'),
+  promoChooser: document.getElementById('promoChooser'),
 };
 
 function formatNumber(value) {
@@ -41,6 +77,59 @@ function chip(text) {
   const node = document.createElement('span');
   node.textContent = text;
   return node;
+}
+
+function setActivePromoVideo(videoId) {
+  const current = promoVideos.find((item) => item.id === videoId) || promoVideos[0];
+  if (!current || !els.promoVideo) return;
+
+  els.promoVideo.src = current.src;
+  els.promoVideo.poster = current.poster;
+  els.promoVideo.setAttribute('aria-label', current.title);
+  els.promoVideo.load();
+
+  if (els.promoTitle) els.promoTitle.textContent = current.title;
+  if (els.promoBlurb) els.promoBlurb.textContent = current.blurb;
+  if (els.promoSpecies) els.promoSpecies.textContent = current.species;
+  if (els.promoDuration) els.promoDuration.textContent = current.duration;
+
+  if (els.promoChooser) {
+    [...els.promoChooser.querySelectorAll('button[data-video-id]')].forEach((button) => {
+      const active = button.dataset.videoId === current.id;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+  }
+}
+
+function renderPromoChooser() {
+  if (!els.promoChooser) return;
+  els.promoChooser.innerHTML = '';
+
+  promoVideos.forEach((video, index) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.dataset.videoId = video.id;
+    button.className = 'promo-chip';
+    button.innerHTML = `
+      <span class="promo-chip-emoji">${video.species === '狗狗' ? '🐶' : '🐱'}</span>
+      <span class="promo-chip-copy">
+        <strong>${video.title}</strong>
+        <small>${video.duration}</small>
+      </span>
+    `;
+    button.addEventListener('click', () => setActivePromoVideo(video.id));
+    els.promoChooser.appendChild(button);
+
+    if (index === 0) {
+      button.classList.add('active');
+      button.setAttribute('aria-pressed', 'true');
+    } else {
+      button.setAttribute('aria-pressed', 'false');
+    }
+  });
+
+  setActivePromoVideo(promoVideos[0]?.id);
 }
 
 function renderTopRoom(topLiveRoom) {
@@ -137,4 +226,5 @@ async function loadRadar() {
 }
 
 els.refreshBtn.addEventListener('click', loadRadar);
+renderPromoChooser();
 loadRadar();
