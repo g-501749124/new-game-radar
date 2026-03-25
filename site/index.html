@@ -7,101 +7,155 @@
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
+  <div class="bg-orb orb-a"></div>
+  <div class="bg-orb orb-b"></div>
+  <div class="bg-orb orb-c"></div>
+
   <main class="app">
     <header class="hero">
-      <div>
-        <p class="eyebrow">直播平台 × Steam</p>
+      <div class="hero-copy">
+        <div class="hero-kicker-wrap">
+          <p class="eyebrow">直播平台 × Steam</p>
+          <span class="cat-pill">ฅ^•ﻌ•^ฅ 猫猫巡航中</span>
+        </div>
         <h1>新游雷达</h1>
-        <p class="subtitle">从斗鱼、虎牙、B站直播采样，结合 Steam 近 30 天发售信息，筛选可能刚上线且正在被主播开播的新游戏，同时展示当前平台热度最高的游戏直播间。</p>
+        <p class="subtitle">从斗鱼、虎牙、B站直播采样，结合 Steam 近 30 天发售信息，筛选可能刚上线且正在被主播开播的新游戏，同时锁定当前平台最热的游戏直播间。</p>
+        <div class="hero-actions">
+          <a class="hero-link" href="#spotlight">先看最热直播间</a>
+          <a class="hero-link secondary" href="#radar-board">查看候选新游</a>
+        </div>
       </div>
-      <div class="hero-stats">
-        <div class="stat">
-          <span class="label">采样直播间</span>
-          <strong id="sampleCount">--</strong>
-        </div>
-        <div class="stat">
-          <span class="label">Steam 近发售命中</span>
-          <strong id="recentCount">--</strong>
-        </div>
-        <div class="stat">
-          <span class="label">候选新游</span>
-          <strong id="candidateCount">--</strong>
-        </div>
+
+      <div class="hero-right">
+        <section class="hero-stats" aria-label="核心统计">
+          <div class="stat primary">
+            <span class="label">采样直播间</span>
+            <strong id="sampleCount">--</strong>
+            <span class="stat-note">猫耳雷达本轮已扫到的房间数</span>
+          </div>
+          <div class="stat-grid">
+            <div class="stat">
+              <span class="label">Steam 近发售命中</span>
+              <strong id="recentCount">--</strong>
+            </div>
+            <div class="stat">
+              <span class="label">候选新游</span>
+              <strong id="candidateCount">--</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="hero-aside" aria-label="说明卡片">
+          <div class="aside-head">
+            <span class="mini-cat">🐾</span>
+            <strong>猫猫情报卡</strong>
+          </div>
+          <p>这个页面优先强调“现在就能验证”的直播间信息，再把疑似刚上线的新游候选整理成卡片看板，方便一眼扫盘。</p>
+        </section>
       </div>
     </header>
 
-    <section class="panel spotlight-panel">
+    <section class="panel meta-panel">
+      <div class="meta-item">
+        <span class="meta-label">状态</span>
+        <strong id="statusText">加载中…</strong>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">更新时间</span>
+        <strong id="generatedAt">--</strong>
+      </div>
+      <div class="meta-item meta-action">
+        <button id="refreshBtn" type="button">刷新页面数据</button>
+      </div>
+    </section>
+
+    <section id="spotlight" class="panel spotlight-panel">
       <div class="panel-head">
         <div>
           <p class="eyebrow">可验证实时内容</p>
           <h2>当前平台热度最高的游戏直播间</h2>
+          <p class="panel-subtitle">把这张卡片当作猫猫雷达刚刚叼回来的最新战报。</p>
         </div>
         <span id="topBadge" class="top-badge">加载中…</span>
       </div>
       <div id="topRoomCard" class="top-room-card hidden">
         <div class="top-room-main">
+          <div class="spotlight-tag">👑 热度榜首</div>
           <p class="top-room-title" id="topRoomTitle">--</p>
           <h3 id="topRoomGame">--</h3>
           <p class="top-room-streamer">主播：<strong id="topRoomStreamer">--</strong></p>
+          <div class="top-room-cta-row">
+            <a id="topRoomLink" class="top-room-link" target="_blank" rel="noreferrer noopener">打开直播间</a>
+            <span class="top-room-hint">实时数据，适合快速人工复核</span>
+          </div>
         </div>
-        <div class="top-room-grid">
-          <div>
-            <span class="label">平台</span>
-            <strong id="topRoomPlatform">--</strong>
+        <div class="top-room-side">
+          <div class="top-room-grid">
+            <div>
+              <span class="label">平台</span>
+              <strong id="topRoomPlatform">--</strong>
+            </div>
+            <div>
+              <span class="label">热度</span>
+              <strong id="topRoomHeat">--</strong>
+            </div>
+            <div>
+              <span class="label">房间号</span>
+              <strong id="topRoomId">--</strong>
+            </div>
+            <div>
+              <span class="label">直播状态</span>
+              <strong>正在巡航</strong>
+            </div>
           </div>
-          <div>
-            <span class="label">热度</span>
-            <strong id="topRoomHeat">--</strong>
-          </div>
-          <div>
-            <span class="label">房间号</span>
-            <strong id="topRoomId">--</strong>
-          </div>
-          <div>
-            <span class="label">房间链接</span>
-            <a id="topRoomLink" target="_blank" rel="noreferrer noopener">打开直播间</a>
+          <div class="cat-callout">
+            <span>🐱</span>
+            <p>如果这一栏很强势，说明平台注意力正在集中在这场直播上。</p>
           </div>
         </div>
       </div>
       <div id="topRoomEmpty" class="empty hidden">
+        <div class="empty-art">🐾</div>
         <p>这轮还没有获取到可展示的直播间样本。</p>
       </div>
     </section>
 
-    <section class="panel meta">
-      <div>
-        <span class="meta-label">状态</span>
-        <strong id="statusText">加载中…</strong>
+    <section id="radar-board" class="panel radar-panel">
+      <div class="panel-head compact">
+        <div>
+          <p class="eyebrow">新游候选看板</p>
+          <h2>雷达结果</h2>
+        </div>
+        <p class="panel-subtitle right">按发售时间、直播热度和命中信号整理，方便快速挑出值得点开的新游戏。</p>
       </div>
-      <div>
-        <span class="meta-label">更新时间</span>
-        <strong id="generatedAt">--</strong>
-      </div>
-      <div>
-        <button id="refreshBtn" type="button">刷新页面数据</button>
-      </div>
-    </section>
-
-    <section class="panel">
-      <h2>雷达结果</h2>
       <div id="emptyState" class="empty hidden">
+        <div class="empty-art">(=^･ω･^=)</div>
         <p>这轮还没有匹配到符合条件的新游戏。</p>
         <p class="empty-sub">可能是平台热度仍集中在老游戏，也可能只是今天没有撞上新游开播窗口。</p>
       </div>
       <div id="cardList" class="card-list"></div>
     </section>
 
-    <section class="panel">
-      <h2>原始播报</h2>
+    <section class="panel message-panel">
+      <div class="panel-head compact">
+        <div>
+          <p class="eyebrow">原始播报</p>
+          <h2>本轮猫猫播报文本</h2>
+        </div>
+      </div>
       <pre id="messageBox" class="message-box">加载中…</pre>
     </section>
   </main>
 
   <template id="cardTemplate">
     <article class="card">
+      <div class="card-glow"></div>
       <div class="card-top">
         <div>
-          <h3 class="game-name"></h3>
+          <div class="card-title-row">
+            <h3 class="game-name"></h3>
+            <span class="cat-badge">🐈 新游蹲点</span>
+          </div>
           <p class="steam-name"></p>
         </div>
         <div class="score-badge"></div>
