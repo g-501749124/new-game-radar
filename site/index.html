@@ -4,12 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>New Game Radar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
+  <div class="grain"></div>
   <div class="bg-orb orb-a"></div>
   <div class="bg-orb orb-b"></div>
   <div class="bg-orb orb-c"></div>
+  <div class="bg-grid"></div>
 
   <main class="app">
     <header class="hero">
@@ -18,15 +23,61 @@
           <p class="eyebrow">直播平台 × Steam</p>
           <span class="cat-pill">ฅ^•ﻌ•^ฅ 猫猫巡航中</span>
         </div>
-        <h1>新游雷达</h1>
-        <p class="subtitle">从斗鱼、虎牙、B站直播采样，结合 Steam 近 30 天发售信息，筛选可能刚上线且正在被主播开播的新游戏，同时锁定当前平台最热的游戏直播间。</p>
+        <div class="headline-stack">
+          <span class="headline-chip">LIVE FELINE RADAR</span>
+          <h1>新游雷达</h1>
+          <p class="subtitle">从斗鱼、虎牙、B站直播采样，结合 Steam 近 30 天发售信息，筛选可能刚上线且正在被主播开播的新游戏，同时把当前平台最热的游戏直播间单拎出来，方便立刻点进去验证。</p>
+        </div>
         <div class="hero-actions">
           <a class="hero-link" href="#spotlight">先看最热直播间</a>
           <a class="hero-link secondary" href="#radar-board">查看候选新游</a>
         </div>
+
+        <section class="hero-story panel-soft-block" aria-label="猫猫提示">
+          <div class="hero-story-copy">
+            <span class="eyebrow">猫猫值班说明</span>
+            <h2>先看猫猫叼回来的头条，再决定要不要点进直播间</h2>
+            <p>这次把首页改成更像“猫咪情报台”——左边负责讲清楚这轮采样抓到了什么，右边直接挂上猫猫视觉，让页面不只是能用，而是真的有点可爱。</p>
+          </div>
+          <div class="hero-mini-cards">
+            <div class="mini-card">
+              <span>🐾</span>
+              <strong>热榜头条</strong>
+              <p>优先给你一个现在就能人工验证的直播间。</p>
+            </div>
+            <div class="mini-card">
+              <span>🎮</span>
+              <strong>新游候选</strong>
+              <p>下方卡片按热度、发售时间和命中信号整理。</p>
+            </div>
+          </div>
+        </section>
       </div>
 
       <div class="hero-right">
+        <section class="cat-stage" aria-label="猫猫主视觉">
+          <div class="cat-stage-frame">
+            <img src="./assets/cats/cat_hero.png" alt="写着 NEW GAME 的猫猫主视觉" class="cat-hero-image" />
+            <div class="cat-stage-badge">CAT SIGNAL ONLINE</div>
+          </div>
+          <div class="cat-stage-strip">
+            <div class="cat-thumb-card">
+              <img src="./assets/cats/cat_peek.png" alt="探头查看雷达的猫猫" class="cat-thumb" />
+              <div>
+                <span class="eyebrow">侦查猫</span>
+                <strong>盯热榜</strong>
+              </div>
+            </div>
+            <div class="cat-thumb-card soft">
+              <img src="./assets/cats/cat_sleep.png" alt="趴着休息的猫猫" class="cat-thumb" />
+              <div>
+                <span class="eyebrow">值班猫</span>
+                <strong>等你验收</strong>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section class="hero-stats" aria-label="核心统计">
           <div class="stat primary">
             <span class="label">采样直播间</span>
@@ -50,13 +101,13 @@
             <span class="mini-cat">🐾</span>
             <strong>猫猫情报卡</strong>
           </div>
-          <p>这个页面优先强调“现在就能验证”的直播间信息，再把疑似刚上线的新游候选整理成卡片看板，方便一眼扫盘。</p>
+          <p>这版页面继续往“霓虹猫猫情报台”推进：把实时直播头条、候选新游和猫猫主视觉绑成同一套布局，而不是散着放的功能块。</p>
         </section>
       </div>
     </header>
 
-    <section class="panel meta-panel">
-      <div class="meta-item">
+    <section class="meta-ribbon panel">
+      <div class="meta-item meta-item-status">
         <span class="meta-label">状态</span>
         <strong id="statusText">加载中…</strong>
       </div>
@@ -64,20 +115,21 @@
         <span class="meta-label">更新时间</span>
         <strong id="generatedAt">--</strong>
       </div>
-      <div class="meta-item meta-action">
+      <div class="meta-item meta-item-action">
         <button id="refreshBtn" type="button">刷新页面数据</button>
       </div>
     </section>
 
-    <section id="spotlight" class="panel spotlight-panel">
-      <div class="panel-head">
+    <section id="spotlight" class="panel spotlight-shell">
+      <div class="panel-head spotlight-head">
         <div>
           <p class="eyebrow">可验证实时内容</p>
           <h2>当前平台热度最高的游戏直播间</h2>
-          <p class="panel-subtitle">把这张卡片当作猫猫雷达刚刚叼回来的最新战报。</p>
+          <p class="panel-subtitle">把这张卡片当作猫猫雷达刚刚叼回来的热榜头条。</p>
         </div>
         <span id="topBadge" class="top-badge">加载中…</span>
       </div>
+
       <div id="topRoomCard" class="top-room-card hidden">
         <div class="top-room-main">
           <div class="spotlight-tag">👑 热度榜首</div>
@@ -110,10 +162,11 @@
           </div>
           <div class="cat-callout">
             <span>🐱</span>
-            <p>如果这一栏很强势，说明平台注意力正在集中在这场直播上。</p>
+            <p>如果这一栏很强势，说明平台注意力现在就集中在这场直播上。</p>
           </div>
         </div>
       </div>
+
       <div id="topRoomEmpty" class="empty hidden">
         <div class="empty-art">🐾</div>
         <p>这轮还没有获取到可展示的直播间样本。</p>

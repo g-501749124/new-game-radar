@@ -6,56 +6,65 @@
 - 页面展示一个可验证的实时内容：当前平台播放游戏观众最多的直播间
 - 提供该直播间直达链接
 - 页面 UI 要更好看、布局更合理，不只是功能可用
+- 融入更多猫猫元素，整体更有风格
+- 去网上找合适的猫猫图片，用于美化 UI
+- 美化完成后把可访问链接发给用户检查
 - 完成后提交并推送 GitHub
 
 ## 当前状态
 - 数据脚本：`scripts/new_game_radar.py`
 - 仓库根目录：`/root/.openclaw/workspace`
 - 自动播报：已停用高频噪音模式
-- 自动驱动方式：计划文件 + 2 分钟低频恢复
+- 自动驱动方式：计划文件 + 1 分钟恢复
 - 网页原型：`site/index.html`、`site/app.js`、`site/styles.css` 已存在并可工作
 - 站点数据：`scripts/generate_new_game_radar_site_data.py` 可生成 `site/data/radar.json`
-- 服务状态：80 端口已有 `python3 -m http.server 80 --directory /root/.openclaw/workspace/site` 在运行，首页与 JSON 均可访问
+- 服务状态：80 端口已有静态服务在运行，首页与 JSON 可访问
+- GitHub 状态：远端 `origin/main` 已同步到最新提交 `3feefad`
+- 当前任务进行中：已接入猫猫图片素材并完成一轮首页重构，接下来做页面核验与 git 提交推送
 
 ## Phases
-1. 跑通数据脚本并确认输出/耗时
-2. 新增“当前平台播放游戏观众最多的直播间 + 直达链接”数据提取
-3. 创建美观、布局合理的 `site/` 网页端原型
-4. 提供服务端或静态刷新机制
-5. 接到 80 端口并验证可访问
+1. 搜索合适的猫猫图片素材（优先可直接引用或安全下载）
+2. 将猫猫图片合理融入首页视觉设计
+3. 优化布局、色彩、卡片层级与按钮视觉
+4. 刷新站点数据并验证页面效果
+5. 确认可访问链接并发给用户检查
 6. git commit + push
 
 ## 当前步骤
-- Phase 6：处理 `site/` 被忽略的提交问题，然后创建提交并推送
+- Phase 4：核验新版页面实际效果，确认可访问后准备提交
 
 ## 已完成
 - 确认项目根目录与主脚本位置
-- 修正项目状态统计口径，避免把整个 workspace 误算进项目变更
-- `scripts/new_game_radar.py --json` 已跑通，样本数约 30，输出结构已确认可消费
+- `scripts/new_game_radar.py --json` 已跑通，输出结构可消费
 - 已新增 `topLiveRoom` 输出，包含平台、游戏、主播、标题、热度、直达链接
-- 已确认 `site/` 页面骨架完成：首页含 hero 统计、最高热度直播间卡片、新游雷达卡片、原始播报区
-- 已确认 `site/app.js` 能消费 `site/data/radar.json`，并渲染 `topLiveRoom` 与候选列表
-- 已通过 `scripts/generate_new_game_radar_site_data.py` / 脚本直出方式生成最新 `site/data/radar.json`
-- 已验证 8000 端口现有静态服务可访问：`/` 返回 200，`/data/radar.json` 返回 200
-- 已确认 80 端口已接入 `site/`：`http://127.0.0.1/` 返回 200，`http://127.0.0.1/data/radar.json` 可解析，当前最高热度直播间链接为 `https://www.douyu.com/10362982`
-- 已核对 git 状态：本任务待提交改动仅剩 `data/new_game_radar/steam_matches.json` 与 `site/data/radar.json`，其余核心网页与脚本文件已在历史提交中
-- 已确认远端 `origin` 指向 `https://github.com/g-501749124/new-game-radar.git`，当前分支为 `main`
-- 已确认普通 `git add` 仍会被 `.gitignore` 拦截，`site/data/radar.json` 需要继续用强制添加或调整 ignore 规则
+- 已确认 `site/` 页面骨架存在并可工作
+- 已验证 80 端口当前可访问站点与 JSON 数据
+- 已完成上一轮猫猫主题看板版本并推送到 GitHub：`3feefad`
+- 已下载并落地 3 张猫猫图片到 `site/assets/cats/`
+- 已重构首页 hero 布局，加入猫猫主视觉、缩略图区和猫猫提示卡
+- 已更新样式文件，增强视觉层次、卡片布局和猫猫元素密度
+- 已刷新 `site/data/radar.json`
+- 已通过浏览器打开 `http://127.0.0.1` 并截图验证新版首页可加载
 
 ## 下一步
-- 用 `git add -f` 纳入 `site/data/radar.json`
-- 完成 commit
-- 推送到 GitHub
-- 推送后记录提交号并结束任务
+- 检查 git diff，确认改动质量
+- 如无问题则 commit + push
+- 推送后把可访问链接发给用户检查
 
 ## 阻塞
-- 无（可用 `git add -f` 继续）
+- 无
 
 ## 验收标准
-- 页面能明显看到当前最高热度直播间
-- 可点击直达链接
-- 页面视觉上不是简陋白板，具备清晰层级与卡片布局
-- 后续能通过 80 端口访问
+- 页面有更明显且协调的猫猫视觉元素（包含图片）
+- 页面布局更好看、层级更清晰
+- 用户能通过我发出的链接直接打开检查
+- 最终页面仍能通过 80 端口访问
+
+## 执行规则
+- 用户新增/修改需求时，先读当前计划，再写回计划，再继续执行
+- 不要反复询问“能不能继续”，默认继续推进，除非遇到真实阻塞
+- 不允许把“旧任务已完成”误写成“当前新任务已完成”
 
 ## Checkpoint
-- 最近项目提交：`0d03923` Add new-game-radar web dashboard
+- 最近旧阶段提交：`3feefad` Polish new-game-radar cat-themed dashboard
+- 当前阶段状态：进行中（未完成）
